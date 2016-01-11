@@ -1,0 +1,11 @@
+<plugin name='active-link' version='1.0' grailsVersion='2.3 &gt; *'>
+  <author>Ramil Zayneev</author>
+  <authorEmail>ramilzrr@gmail.com</authorEmail>
+  <title>Active Link Tag Plugin</title>
+  <description>active-link it's decoration for g:link tag. Plugin providing g:activeLink tag which will add additional css class for g:link according specified condition. This plugin is a translation for RoR "active_link_to".</description>
+  <documentation>http://grails.org/plugin/active-link</documentation>
+  <type>ActiveLinkGrailsPlugin</type>
+  <resources>
+    <resource>org.rzayneev.active.link.ActiveLinkTagLib</resource>
+  </resources>
+</plugin>
