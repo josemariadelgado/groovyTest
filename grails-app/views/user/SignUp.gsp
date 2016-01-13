@@ -116,7 +116,7 @@
         <g:form controller="User" action="signUp">
             <div class="signup-form">
                 <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Username *" name="username" required>
+                    <input type="text" class="login-field" placeholder="Username *" value="${groovytest.UserController.username}" name="username" required>
                 </div>
 
                 <div class="control-group">
@@ -128,30 +128,42 @@
                 </div>
 
                 <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Name *" name="name" required>
+                    <input type="text" class="login-field" placeholder="Name *" value="${groovytest.UserController.name}" name="name" required>
                 </div>
 
                 <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Last Name *" name="lastName" required>
+                    <input type="text" class="login-field" placeholder="Last Name *" value="${groovytest.UserController.lastName}" name="lastName" required>
                 </div>
 
                 <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Phone Number" name="phoneNumber" required>
+                    <input type="text" class="login-field" placeholder="Phone Number" value="${groovytest.UserController.phoneNumber}" name="phoneNumber" required>
                 </div>
 
                 <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Address" name="address" required>
+                    <input type="text" class="login-field" placeholder="Address" value="${groovytest.UserController.address}" name="address" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-large btn-block">Sign Up!</button>
 
-                <div><a class="back" href="login">Back to Login</a></div>
+                <div><g:link class="back" controller="user" action="index">Back to Login</g:link></div>
         </g:form>
     </div>
-        <g:if test=""><div class="alert alert-danger" role="alert">User already exists</div></g:if>
+        <g:if test="${groovytest.UserController.registerFailed == 1}">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Username already exists
+            </div>
+        </g:if>
+        <g:elseif test="${groovytest.UserController.registerFailed == 2}">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Password fields don't match
+            </div>
+        </g:elseif>
+        <g:elseif test="${groovytest.UserController.registerFailed == 0}">
+        </g:elseif>
     </div>
 </div>
 </body>
-
 </body>
 </html>

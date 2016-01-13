@@ -9,7 +9,7 @@ class UrlMappings {
 
         "/"(controller: 'user')
         "/login"(view:"/user/LogIn")
-        "/signup"(controller:"User", action: "signUp")
+        "/signup"(view: "user/SignUp")
         "500"(view:'/error')
 	}
 }

@@ -96,6 +96,12 @@
         margin-top: 12px;
     }
 
+    .alert-danger {
+        margin-top: 10px;
+        margin-bottom: -5px;
+        line-height: 5px;
+    }
+
     </style>
 
 
@@ -112,7 +118,7 @@
         <g:form controller="User" action="login">
         <div class="login-form">
             <div class="control-group">
-                <input type="text" class="login-field" value="" placeholder="username" name="username" >
+                <input type="text" class="login-field" value="${groovytest.UserController.username}" placeholder="username" name="username" >
             </div>
 
             <div class="control-group">
@@ -120,13 +126,20 @@
             </div>
 
             <button type="submit" class="btn btn-primary btn-large btn-block">Login</button>
-            <a class="login-link" href="signup">Don't have an account?</a>
+            <a class="login-link" href="/groovyTest/signup">Don't have an account?</a>
         </g:form>
         </div>
+        <g:if test="${groovytest.UserController.loginFailed == 1}">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Wrong username or password
+            </div>
+        </g:if>
+        <g:elseif test="${groovytest.UserController.loginFailed == 0}">
+
+        </g:elseif>
     </div>
 </div>
-
 </body>
-
 </body>
 </html>

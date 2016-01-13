@@ -14,4 +14,5 @@ class User {
         username(blank: false, unique: true)
         pass(blank: false)
     }
+
 }
