@@ -20,7 +20,6 @@ class UserController {
         phoneNumber = ""
         address = ""
         registerFailed = 0
-        loginFailed = 0
         logInUsername = ""
 
         render view: '/user/LogIn'
@@ -44,13 +43,11 @@ class UserController {
                 println "User already exists"
                 registerFailed = 1
                 username = ""
-                render view: "/user/LogIn"
+                render view: "/user/SignUp"
             } else {
 
-                if (params.password == params.repeatPassword) {
-
                     def user = new User(username: params.username, name: params.name, pass: params.password,
-                            lastName: params.lastName, phoneNumber: params.phoneNumber, address: params.address)
+                            lastName: params.lastName)
 
                     user.save()
 
@@ -67,12 +64,6 @@ class UserController {
                     } else {
                         user.errors.allErrors.each { println it.defaultMessage }
                     }
-                } else {
-                    println "Password fields do not match"
-                    registerFailed = 2
-                    render view: "/user/LogIn"
-
-                }
             }
         }
     }
@@ -86,12 +77,13 @@ class UserController {
             if (u) {
                 session.user = u
                 redirect(controller:'HomeScreen')
+                println "logged in"
                 loginFailed = 0
                 currentUser = params.username
                 logInUsername = ""
             } else {
                 loginFailed = 1
-                render view: "/user/LogIn"
+                redirect(action: "index")
             }
         } else if (session.user) {
             redirect(controller:'HomeScreen')

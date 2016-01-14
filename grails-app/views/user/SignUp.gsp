@@ -13,93 +13,132 @@
 
 
     <style type="text/css">
-    * {
-        box-sizing: border-box;
+    .body {
+        background: #F8F8F8;
     }
 
-    *:focus {
+    .page-title {
+        margin-top: 75px;
+        margin-left: 350px;
+
+    }
+
+    .login-form {
+        margin-top: 250px;
+        margin-left: 40%;
+        width: 350px;
+        border-spacing: 20px;
+        border-radius: 2px;
+        background: white;
+        border: solid;
+        border-width: 1px;
+        border-color:#F0F0F0;
+        font-family: "Ubuntu";
+    }
+
+    .login-form .form-control {
+        margin-top: 7px;;
+    }
+
+    .login-form .login-button {
+        margin-top: 10px;
+        width: 100%;
+        background: #5882FA;
+        border-width: 0px;
+        width: 300px;
+        margin-left: 10px;
+    }
+
+    .login-form .login-button:hover {
+        margin-top: 10px;
+        width: 100%;
+        background: #5858FA;
+        border-width: 0px;
+        width: 300px;
+        margin-left: 10px;
+    }
+
+    .login-form .login-button:active {
+        margin-top: 10px;
+        width: 100%;
+        background: #2E64FE;
+        border-width: 0px;
+        outline: none;
+        width: 300px;
+        margin-left: 10px;
+    }
+
+    .login-form .login-button:focus {
+
         outline: none;
     }
-    body {
-        font-family: Arial;
-        background-color: #E6E6E6;
-        padding: 50px;
-    }
-    .login {
-        margin: 20px auto;
-        width: 300px;
-    }
-    .login-screen {
-        background-color: #FFF;
-        padding: 20px;
-        border-radius: 5px
-    }
 
-    .app-title {
-        text-align: center;
-        color: #777;
-        margin-bottom: 30px;
-        margin-top: -15px;
+    .username-field {
+
     }
 
     .signup-form {
-        text-align: center;
-    }
-    .control-group {
-        margin-bottom: 10px;
-    }
-
-    input {
-        text-align: center;
-        background-color: #ECF0F1;
-        border: 2px solid transparent;
-        border-radius: 3px;
-        font-size: 16px;
-        font-weight: 200;
-        padding: 10px 0;
-        width: 250px;
-        transition: border .5s;
+        margin-top: 100px;
+        margin-left: 40%;
+        width:350px;
+        border-spacing: 10px;
+        border-radius: 5px;
+        background: #eaeaea;
+        border: solid;
     }
 
-    input:focus {
-        border: 2px solid #3498DB;
-        box-shadow: none;
+    .alert-danger {
+        margin-top: 15px;
     }
 
-    .btn {
-        border: 2px solid transparent;
-        background: #3498DB;
-        color: #ffffff;
-        font-size: 16px;
-        line-height: 20px;
-        padding: 10px 0;
-        text-decoration: none;
-        text-shadow: none;
-        border-radius: 3px;
-        box-shadow: none;
-        transition: 0.25s;
-        display: block;
-        width: 250px;
-        margin: 0 auto;
+    .navbar-form {
+        margin-right: 50px;
     }
 
-    .btn:hover {
-        background-color: #2989B4;
+    .signup-form .form-control {
+        margin-top: 7px;
     }
 
-    .back {
-        font-size: 13px;
-        color: #444;
-        display: block;
-        margin-top: 12px;
+    .signup-form .signup-button {
+        margin-top: 15px;
     }
 
-        .alert-danger {
-            margin-top: 20px;
-            margin-bottom: -5px;
-            line-height: 5px;
-        }
+    .login-username {
+        border-width: 1px;
+        border-color: #eeeeee;
+        border-radius: 2px;
+        width: 300px;
+        margin-left: 10px;
+    }
 
+    .login-password {
+        border-width: 1px;
+        border-color: #eeeeee;
+        border-radius: 2px;
+        width: 300px;
+        margin-left: 10px;
+    }
+
+    .login-label{
+        margin-top: 0px;
+        margin-left: 28%;
+        color: #424242;
+    }
+
+    .fail-label {
+        color: red;
+        margin-left: 15px;
+        margin-top: 20px;
+        margin-bottom: -10px;
+
+    }
+
+    .signup-link {
+        width: 200px;
+        margin-left: 100px;
+        margin-top: 30px;
+        margin-bottom: -20px;
+    }
     </style>
 
 
@@ -112,42 +151,16 @@
     <div class="login-screen">
         <div class="app-title">
             <h1>Sign Up</h1>
-        </div>
-        <g:form controller="User" action="signUp">
-            <div class="signup-form">
-                <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Username *" value="${groovytest.UserController.username}" name="username" required>
-                </div>
-
-                <div class="control-group">
-                    <input type="password" class="login-field" placeholder="Password *" name="password" required>
-                </div>
-
-                <div class="control-group">
-                    <input type="password" class="login-field" placeholder="Repeat password *" name="repeatPassword" required>
-                </div>
-
-                <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Name *" value="${groovytest.UserController.name}" name="name" required>
-                </div>
-
-                <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Last Name *" value="${groovytest.UserController.lastName}" name="lastName" required>
-                </div>
-
-                <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Phone Number" value="${groovytest.UserController.phoneNumber}" name="phoneNumber" required>
-                </div>
-
-                <div class="control-group">
-                    <input type="text" class="login-field" placeholder="Address" value="${groovytest.UserController.address}" name="address" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-large btn-block">Sign Up!</button>
-
-                <div><g:link class="back" controller="user" action="index">Back to Login</g:link></div>
-        </g:form>
-    </div>
+            <div class="container signup-form">
+                <p><font face="" size="4">Don't have an account? Sign Up</font></p>
+                <g:form controller="User" action="signUp">
+                    <input type="text" class="form-control username-field" name="username" placeholder="Username" autocomplete="off">
+                    <input type="password" class="form-control password-field" name="password" placeholder="Password" autocomplete="off">
+                    <input type="text" class="form-control name-field" name="name" placeholder="Name" autocomplete="off">
+                    <input type="text" class="form-control lastname-field" name="lastName" placeholder="Last Name" autocomplete="off">
+                    <button type="submit" class="btn btn-primary signup-button">Sign Up!</button>
+                </g:form>
+            </div>
         <g:if test="${groovytest.UserController.registerFailed == 1}">
             <div class="alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

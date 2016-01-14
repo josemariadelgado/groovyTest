@@ -1,145 +1,159 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Log In</title>
-
+    <title>Page Title</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-
-
-
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <style type="text/css">
-    * {
-        box-sizing: border-box;
+
+    .body {
+        background: white;
     }
 
-    *:focus {
-        outline: none;
-    }
-    body {
-        font-family: Arial;
-        background-color: #E6E6E6;
-        padding: 50px;
-    }
-    .login {
-        margin: 20px auto;
-        width: 300px;
-    }
-    .login-screen {
-        background-color: #FFF;
-        padding: 20px;
-        border-radius: 5px
-    }
+    .page-title {
+        margin-top: 75px;
+        margin-left: 350px;
 
-    .app-title {
-        text-align: center;
-        color: #777;
-        margin-bottom: 30px;
-        margin-top: -15px;
     }
 
     .login-form {
-        text-align: center;
-    }
-    .control-group {
-        margin-bottom: 10px;
-    }
-
-    input {
-        text-align: center;
-        background-color: #ECF0F1;
-        border: 2px solid transparent;
-        border-radius: 3px;
-        font-size: 16px;
-        font-weight: 200;
-        padding: 10px 0;
-        width: 250px;
-        transition: border .5s;
+        margin-top: 250px;
+        margin-left: auto;
+        width: 350px;
+        border-spacing: 20px;
+        border-radius: 5px;
+        background: white;
+        border: solid;
+        border-width: 1px;
+        border-color:#F0F0F0;
+        font-family: "Ubuntu";
     }
 
-    input:focus {
-        border: 2px solid #3498DB;
-        box-shadow: none;
+    .login-form .form-control {
+        margin-top: 7px;;
     }
 
-    .btn {
-        border: 2px solid transparent;
-        background: #3498DB;
-        color: #ffffff;
-        font-size: 16px;
-        line-height: 25px;
-        padding: 10px 0;
-        text-decoration: none;
-        text-shadow: none;
-        border-radius: 3px;
-        box-shadow: none;
-        transition: 0.25s;
-        display: block;
-        width: 250px;
-        margin: 0 auto;
-        margin-top: 15px;
+    .login-form .login-button {
+        margin-top: 10px;
+        width: 100%;
+        background: #5882FA;
+        border-width: 0px;
+        width: 300px;
+        margin-left: 10px;
     }
 
-    .btn:hover {
-        background-color: #2989B4;
+    .login-form .login-button:hover {
+        margin-top: 10px;
+        width: 100%;
+        background: #5858FA;
+        border-width: 0px;
+        width: 300px;
+        margin-left: 10px;
     }
 
-    .login-link {
-        font-size: 13px;
-        color: #444;
-        display: block;
-        margin-top: 12px;
+    .login-form .login-button:active {
+        margin-top: 10px;
+        width: 100%;
+        background: #2E64FE;
+        border-width: 0px;
+        outline: none;
+        width: 300px;
+        margin-left: 10px;
+    }
+
+    .login-form .login-button:focus {
+
+        outline: none;
+    }
+
+    .username-field {
+
+    }
+
+    .signup-form {
+        margin-top: 100px;
+        margin-left: 40%;
+        width:350px;
+        border-spacing: 10px;
+        border-radius: 5px;
+        background: #eaeaea;
+        border: solid;
     }
 
     .alert-danger {
-        margin-top: 10px;
-        margin-bottom: -5px;
-        line-height: 5px;
+        margin-top: 15px;
     }
 
+    .navbar-form {
+        margin-right: 50px;
+    }
+
+    .signup-form .form-control {
+        margin-top: 7px;
+    }
+
+    .signup-form .signup-button {
+        margin-top: 15px;
+    }
+
+        .login-username {
+            border-width: 1px;
+            border-color: #eeeeee;
+            border-radius: 2px;
+            width: 300px;
+            margin-left: 10px;
+        }
+
+        .login-password {
+            border-width: 1px;
+            border-color: #eeeeee;
+            border-radius: 2px;
+            width: 300px;
+            margin-left: 10px;
+        }
+
+        .login-label{
+            margin-top: 0px;
+            margin-left: 28%;
+            color: #424242;
+        }
+
+        .fail-label {
+            color: red;
+            margin-left: 18px;
+            margin-top: 20px;
+            margin-bottom: -10px;
+
+        }
+
+        .signup-link {
+            width: 200px;
+            margin-left: 100px;
+            margin-top: 30px;
+            margin-bottom: -20px;
+        }
+
     </style>
-
-
 </head>
-
-<body>
-
-<body>
-<div class="login">
-    <div class="login-screen">
-        <div class="app-title">
-            <h1>Login</h1>
-        </div>
-        <g:form controller="User" action="login">
-        <div class="login-form">
-            <div class="control-group">
-                <input type="text" class="login-field" value="${groovytest.UserController.username}" placeholder="username" name="username" >
-            </div>
-
-            <div class="control-group">
-                <input type="password" class="login-field" value="" placeholder="password" name="password" >
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-large btn-block">Login</button>
-            <a class="login-link" href="/groovyTest/signup">Don't have an account?</a>
-        </g:form>
-        </div>
-        <g:if test="${groovytest.UserController.loginFailed == 1}">
-            <div class="alert alert-danger" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                Wrong username or password
-            </div>
-        </g:if>
-        <g:elseif test="${groovytest.UserController.loginFailed == 0}">
-
-        </g:elseif>
+<body class="body">
+<div class="container login-form">
+    <g:form controller="User" action="login">
+        <h1 class="login-label"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Log In</h1>
+        <br>
+            <input type="text" class="form-control login-username" placeholder="Nombre de Usuario" name="username">
+            <input type="password" class="form-control login-password" placeholder="Contraseña" name="password" autocomplete="off">
+            <button type="submit" class="btn btn-primary btn-large login-button">Iniciar sesión</button>
+    </g:form>
+    <g:if test="${groovytest.UserController.loginFailed == 1}">
+        <p class="fail-label">Nombre de usuario o contraseña incorrectos</p>
+    </g:if>
+    <div class="signup-link">
+        <a class="" href="signup">¿No tienes cuenta?</a>
     </div>
 </div>
-</body>
 </body>
 </html>

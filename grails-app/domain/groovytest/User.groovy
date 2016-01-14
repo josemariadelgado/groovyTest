@@ -13,6 +13,10 @@ class User {
 
         username(blank: false, unique: true)
         pass(blank: false)
+        name(blank: false)
+        lastName(blank: false)
+        phoneNumber(blank: true, nullable: true)
+        address(blank: true, nullable: true)
     }
 
 }
