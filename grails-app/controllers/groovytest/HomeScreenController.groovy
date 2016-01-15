@@ -5,8 +5,9 @@ class HomeScreenController {
 
     def index() {
 
+        UserController.editProfile = 0
+
         user = User.findByUsername(UserController.currentUser)
-        println user.name
 
             if(session.user) {
                 render view: '/homeScreen/HomeScreen'

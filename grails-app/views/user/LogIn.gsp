@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Page Title</title>
+    <title>Social</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
@@ -12,12 +12,6 @@
 
     .body {
         background: white;
-    }
-
-    .page-title {
-        margin-top: 75px;
-        margin-left: 350px;
-
     }
 
     .login-form {
@@ -37,7 +31,7 @@
         margin-top: 7px;;
     }
 
-    .login-form .login-button {
+    .login-button {
         margin-top: 10px;
         width: 100%;
         background: #5882FA;
@@ -46,51 +40,7 @@
         margin-left: 10px;
     }
 
-    .login-form .login-button:hover {
-        margin-top: 10px;
-        width: 100%;
-        background: #5858FA;
-        border-width: 0px;
-        width: 300px;
-        margin-left: 10px;
-    }
 
-    .login-form .login-button:active {
-        margin-top: 10px;
-        width: 100%;
-        background: #2E64FE;
-        border-width: 0px;
-        outline: none;
-        width: 300px;
-        margin-left: 10px;
-    }
-
-    .login-form .login-button:focus {
-
-        outline: none;
-    }
-
-    .username-field {
-
-    }
-
-    .signup-form {
-        margin-top: 100px;
-        margin-left: 40%;
-        width:350px;
-        border-spacing: 10px;
-        border-radius: 5px;
-        background: #eaeaea;
-        border: solid;
-    }
-
-    .alert-danger {
-        margin-top: 15px;
-    }
-
-    .navbar-form {
-        margin-right: 50px;
-    }
 
     .signup-form .form-control {
         margin-top: 7px;
@@ -127,7 +77,6 @@
             margin-left: 18px;
             margin-top: 20px;
             margin-bottom: -10px;
-
         }
 
         .signup-link {
