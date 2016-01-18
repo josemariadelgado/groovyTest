@@ -64,7 +64,9 @@
     <p>${UserController.userSearched.name} ${UserController.userSearched.lastName}</p>
     <p>${UserController.userSearched.phoneNumber}</p>
     <p>${UserController.userSearched.address}</p>
+    <g:form controller="User" action="addAsFriend">
     <button type="submit" class="btn btn-primary btn-large login-button">Añadir como amigo</button>
+    </g:form>
 </div>
 </body>
 </html>

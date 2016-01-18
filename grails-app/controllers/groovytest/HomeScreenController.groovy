@@ -7,10 +7,12 @@ class HomeScreenController {
 
         UserController.editProfile = 0
 
-        user = User.findByUsername(UserController.currentUser)
+        println UserController.currentUser.name
 
             if(session.user) {
-                render view: '/homeScreen/HomeScreen'
+
+                def u = UserController.currentUser
+                render (view: '/homeScreen/HomeScreen', model: [user: u])
 
             } else {
                 redirect(uri:'/')

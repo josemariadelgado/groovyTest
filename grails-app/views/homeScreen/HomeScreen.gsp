@@ -37,14 +37,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="">@${groovytest.UserController.currentUser}</a>
+            <a class="navbar-brand" href="">@${groovytest.UserController.currentUser.username}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Inicio<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Amigos</a></li>
+                    <li><a href="#">Amigos</a></li>
             </ul>
             <g:form controller="User" action="searchUser" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -60,10 +60,10 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
-    <h2> @${HomeScreenController.user.username}</h2>
-    <p>${HomeScreenController.user.name} ${HomeScreenController.user.lastName}</p>
-    <p>${HomeScreenController.user.phoneNumber}</p>
-    <p>${HomeScreenController.user.address}</p>
+    <h2> @${user.username}</h2>
+    <p>${user.name} ${user.lastName}</p>
+    <p>${user.phoneNumber}</p>
+    <p>${user.address}</p>
 </div>
 </body>
 </html>

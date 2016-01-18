@@ -14,21 +14,15 @@
 
     <style type="text/css">
     .body {
-        background: #F8F8F8;
+        background: white;
     }
 
-    .page-title {
-        margin-top: 75px;
-        margin-left: 350px;
-
-    }
-
-    .login-form {
+    .signup-form {
         margin-top: 250px;
-        margin-left: 40%;
+        margin-left: auto;
         width: 350px;
         border-spacing: 20px;
-        border-radius: 2px;
+        border-radius: 5px;
         background: white;
         border: solid;
         border-width: 1px;
@@ -40,7 +34,7 @@
         margin-top: 7px;;
     }
 
-    .login-form .login-button {
+    .signup-button {
         margin-top: 10px;
         width: 100%;
         background: #5882FA;
@@ -49,51 +43,7 @@
         margin-left: 10px;
     }
 
-    .login-form .login-button:hover {
-        margin-top: 10px;
-        width: 100%;
-        background: #5858FA;
-        border-width: 0px;
-        width: 300px;
-        margin-left: 10px;
-    }
 
-    .login-form .login-button:active {
-        margin-top: 10px;
-        width: 100%;
-        background: #2E64FE;
-        border-width: 0px;
-        outline: none;
-        width: 300px;
-        margin-left: 10px;
-    }
-
-    .login-form .login-button:focus {
-
-        outline: none;
-    }
-
-    .username-field {
-
-    }
-
-    .signup-form {
-        margin-top: 100px;
-        margin-left: 40%;
-        width:350px;
-        border-spacing: 10px;
-        border-radius: 5px;
-        background: #eaeaea;
-        border: solid;
-    }
-
-    .alert-danger {
-        margin-top: 15px;
-    }
-
-    .navbar-form {
-        margin-right: 50px;
-    }
 
     .signup-form .form-control {
         margin-top: 7px;
@@ -103,7 +53,7 @@
         margin-top: 15px;
     }
 
-    .login-username {
+    .form-control {
         border-width: 1px;
         border-color: #eeeeee;
         border-radius: 2px;
@@ -127,10 +77,9 @@
 
     .fail-label {
         color: red;
-        margin-left: 15px;
+        margin-left: 18px;
         margin-top: 20px;
         margin-bottom: -10px;
-
     }
 
     .signup-link {
@@ -145,38 +94,28 @@
 </head>
 
 <body>
-
-<body>
 <div class="login">
     <div class="login-screen">
         <div class="app-title">
-            <h1>Sign Up</h1>
             <div class="container signup-form">
-                <p><font face="" size="4">Don't have an account? Sign Up</font></p>
                 <g:form controller="User" action="signUp">
-                    <input type="text" class="form-control username-field" name="username" placeholder="Username" autocomplete="off">
-                    <input type="password" class="form-control password-field" name="password" placeholder="Password" autocomplete="off">
-                    <input type="text" class="form-control name-field" name="name" placeholder="Name" autocomplete="off">
-                    <input type="text" class="form-control lastname-field" name="lastName" placeholder="Last Name" autocomplete="off">
+                    <input type="text" class="form-control username-field" name="username" placeholder="Nombre de Usuario *" autocomplete="off">
+                    <input type="password" class="form-control password-field" name="password" placeholder="Contraseña *" autocomplete="off">
+                    <input type="text" class="form-control name-field" name="name" placeholder="Nombre *" autocomplete="off">
+                    <input type="text" class="form-control lastname-field" name="lastName" placeholder="Apellidos *" autocomplete="off">
+                    <input type="text" class="form-control phoneNumber-field" name="phoneNumber" placeholder="Teléfono" autocomplete="off">
+                    <input type="text" class="form-control address-field" name="address" placeholder="Dirección" autocomplete="off">
                     <button type="submit" class="btn btn-primary signup-button">Sign Up!</button>
                 </g:form>
+                <g:if test="${groovytest.UserController.userAlreadyExists == 1}">
+                <p class="fail-label">El nombre de usuario ya está siendo usado por otra persona.</p>
+                </g:if>
+                <g:if test="${groovytest.UserController.userAlreadyExists == 2}">
+                    <p class="fail-label">El nombre de usuario, la contraseña, el nombre y los apellidos son campos obligatorios.</p>
+                </g:if>
             </div>
-        <g:if test="${groovytest.UserController.registerFailed == 1}">
-            <div class="alert alert-danger" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                Username already exists
-            </div>
-        </g:if>
-        <g:elseif test="${groovytest.UserController.registerFailed == 2}">
-            <div class="alert alert-danger" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                Password fields don't match
-            </div>
-        </g:elseif>
-        <g:elseif test="${groovytest.UserController.registerFailed == 0}">
-        </g:elseif>
     </div>
 </div>
-</body>
+</div>
 </body>
 </html>

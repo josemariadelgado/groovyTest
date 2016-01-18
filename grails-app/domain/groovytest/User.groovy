@@ -15,8 +15,8 @@ class User {
         pass(blank: false)
         name(blank: false)
         lastName(blank: false)
-        phoneNumber(blank: true, nullable: true)
-        address(blank: true, nullable: true)
+        phoneNumber(blank: false, nullable: true)
+        address(blank: false, nullable: true)
     }
 
 }

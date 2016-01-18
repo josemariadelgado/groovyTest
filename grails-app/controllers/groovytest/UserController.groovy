@@ -3,93 +3,68 @@ package groovytest
 class UserController {
     def scaffold = User
     static int loginFailed = 0
-    static int registerFailed = 0
+    static int userAlreadyExists = 0
     static int editProfile = 0
-    static String currentUser = ""
-    static String username = ""
-    static String name = ""
-    static String lastName = ""
-    static String phoneNumber = ""
-    static String address = ""
+    def static currentUser
     static String logInUsername = ""
     def static userSearched
 
+
+    def UserService
+
     def index() {
 
-        username = ""
-        name = ""
-        lastName = ""
-        phoneNumber = ""
-        address = ""
-        registerFailed = 0
+        userAlreadyExists = 0
         logInUsername = ""
 
         render view: '/user/LogIn'
 
     }
 
-    def signUp() {
+    def signUp(String username, String password, String name, String lastName, String phoneNumber, String address) {
 
-        username = params.username
-        name = params.name
-        lastName = params.lastName
-        phoneNumber = params.phoneNumber
-        address = params.address
+        if (username == "" || password == "" || name == "" || lastName == "") {
+            userAlreadyExists = 2
+            render view: "/user/SignUp"
+        } else {
 
-
-        if (request.method == 'POST') {
-
-            def u = User.findByUsername(params.username)
+            def u = User.findByUsername(username)
 
             if (u) {
+                userAlreadyExists = 1
                 println "User already exists"
-                registerFailed = 1
-                username = ""
                 render view: "/user/SignUp"
+
             } else {
-
-                def user = new User(username: params.username, name: params.name, pass: params.password,
-                            lastName: params.lastName)
-
-                user.save()
-
-                if (user.save()) {
-                    println "User registered. Username:${user.username}"
-                    username = ""
-                    name = ""
-                    lastName = ""
-                    phoneNumber = ""
-                    address = ""
-                    registerFailed = 0
-                    redirect(action: "index")
-
-                } else {
-                    user.errors.allErrors.each { println it.defaultMessage }
-
-                }
+                UserService.signUp username, password, name, lastName, phoneNumber, address
+                redirect(action: "index")
             }
         }
     }
 
-    def login() {
+    def login(User user, String username, String password) {
 
-        logInUsername = params.username
+        if (username == "" || password == "") {
 
-        if (request.method == 'POST') {
-            def u = User.findByUsernameAndPass(params.username, params.password)
-            if (u) {
-                session.user = u
-                redirect(controller:'HomeScreen')
-                println "logged in"
+            loginFailed = 1
+            render view: "/user/LogIn"
+
+        } else {
+
+            user = User.findByUsernameAndPass(username, password)
+
+            if (user) {
                 loginFailed = 0
-                currentUser = params.username
-                logInUsername = ""
+                currentUser = user
+                println "Logged in as @${user.username}. ${user.name}"
+                session.user = currentUser
+                redirect(controller: 'HomeScreen', action: "index")
+
             } else {
                 loginFailed = 1
-                redirect(action: "index")
+                render view: "/user/LogIn"
+
             }
-        } else if (session.user) {
-            redirect(controller:'HomeScreen')
         }
     }
 
