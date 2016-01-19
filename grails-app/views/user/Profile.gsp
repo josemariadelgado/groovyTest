@@ -5,7 +5,7 @@
   Time: 13:51
 --%>
 
-<%@ page import="groovytest.HomeScreenController" contentType="text/html;charset=UTF-8" %>
+<%@ page import="groovytest.ProfileController; groovytest.HomeScreenController" contentType="text/html;charset=UTF-8" %>
 <%@ page import="groovytest.UserController" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -79,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="">@${UserController.currentUser}</a>
+            <a class="navbar-brand" href="">@${user.username}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -88,12 +88,12 @@
                 <li><a href="/groovyTest/homeScreen/index">Inicio<span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Amigos</a></li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control search-field" placeholder="Buscar">
-                </div>
-                <button type="submit" class="btn btn-default">Buscar</button>
-            </form>
+        <g:form controller="User" action="searchUser" class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control search-field" placeholder="Buscar">
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        </g:form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/groovyTest/profile">Mi perfil</a></li>
                 <li><a href="/groovyTest/User/logout">Cerrar sesión</a> </li>
@@ -101,84 +101,84 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<g:if test="${UserController.editProfile == 0}">
+<g:if test="${ProfileController.editProfile == 0}">
 <div class="container">
-    <h2>${HomeScreenController.user.name} ${HomeScreenController.user.lastName}</h2>
-    <p>@${HomeScreenController.user.username}</p>
-    <p>${HomeScreenController.user.phoneNumber}</p>
-    <p>${HomeScreenController.user.address}</p>
-    <g:form controller="User" action="editProfileView">
+    <h2>${user.name} ${user.lastName}</h2>
+    <p>@${user.username}</p>
+    <p>${user.phoneNumber}</p>
+    <p>${user.address}</p>
+    <g:form controller="Profile" action="editProfileView">
     <button type="submit" class="btn btn-default btn-large editprofile-button">Editar perfil</button>
         </g:form>
 </div>
     </g:if>
-    <g:elseif test="${UserController.editProfile == 1}">
-        <g:form controller="User" action="editProfile">
+    <g:elseif test="${ProfileController.editProfile == 1}">
+        <g:form controller="Profile" action="editProfile">
         <div class="container editprofile-form">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.username}"
+            <input type="text" class="form-control login-username" value="${user.username}"
             placeholder="Nombre de Usuario" name="username" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.name}"
+            <input type="text" class="form-control login-username" value="${user.name}"
             placeholder="Nombre" name="name" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.lastName}"
+            <input type="text" class="form-control login-username" value="${user.lastName}"
             placeholder="Apellidos" name="lastName" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.phoneNumber}"
+            <input type="text" class="form-control login-username" value="${user.phoneNumber}"
             placeholder="Teléfono" name="phoneNumber" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.address}"
+            <input type="text" class="form-control login-username" value="${user.address}"
             placeholder="Dirección" name="address" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Guardar</button>
         </div>
         </g:form>
         <div class="container changepassword-form">
-            <g:form controller="User" action="changePassword">
+            <g:form controller="Profile" action="changePassword">
                 <input type="password" class="form-control login-password" placeholder="Nueva  contraseña" name="password" autocomplete="off">
                 <input type="password" class="form-control login-password" placeholder="Repite la contraseña" name="repeatPassword" autocomplete="off">
                 <button type="submit" class="btn btn-primary btn-large login-button">Cambiar contraseña</button>
             </g:form>
         </div>
     </g:elseif>
-<g:elseif test="${groovytest.UserController.editProfile == 2}">
-    <g:form controller="User" action="editProfile">
+<g:elseif test="${ProfileController.editProfile == 2}">
+    <g:form controller="Profile" action="editProfile">
         <div class="container editprofile-form">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.username}"
+            <input type="text" class="form-control login-username" value="${user.username}"
                    placeholder="Nombre de Usuario" name="username" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.name}"
+            <input type="text" class="form-control login-username" value="${user.name}"
                    placeholder="Nombre" name="name" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.lastName}"
+            <input type="text" class="form-control login-username" value="${user.lastName}"
                    placeholder="Apellidos" name="lastName" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.phoneNumber}"
+            <input type="text" class="form-control login-username" value="${user.phoneNumber}"
                    placeholder="Teléfono" name="phoneNumber" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.address}"
+            <input type="text" class="form-control login-username" value="${user.address}"
                    placeholder="Dirección" name="address" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Guardar</button>
             <p class="fail-label">El nombre de usuario, el nombre y los apellidos no pueden estar vacios.</p>
         </div>
     </g:form>
     <div class="container changepassword-form">
-        <g:form controller="User" action="changePassword">
+        <g:form controller="Profile" action="changePassword">
             <input type="password" class="form-control login-password" placeholder="Nueva contraseña" name="password" autocomplete="off">
             <input type="password" class="form-control login-password" placeholder="Repite la contraseña" name="repeatPassword" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Cambiar contraseña</button>
         </g:form>
     </div>
 </g:elseif>
-<g:elseif test="${groovytest.UserController.editProfile == 3}">
-    <g:form controller="User" action="editProfile">
+<g:elseif test="${ProfileController.editProfile == 3}">
+    <g:form controller="Profile" action="editProfile">
         <div class="container editprofile-form">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.username}"
+            <input type="text" class="form-control login-username" value="${user.username}"
                    placeholder="Nombre de Usuario" name="username" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.name}"
+            <input type="text" class="form-control login-username" value="${user.name}"
                    placeholder="Nombre" name="name" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.lastName}"
+            <input type="text" class="form-control login-username" value="${user.lastName}"
                    placeholder="Apellidos" name="lastName" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.phoneNumber}"
+            <input type="text" class="form-control login-username" value="${user.phoneNumber}"
                    placeholder="Teléfono" name="phoneNumber" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.address}"
+            <input type="text" class="form-control login-username" value="${user.address}"
                    placeholder="Dirección" name="address" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Guardar</button>
         </div>
     </g:form>
     <div class="container changepassword-form">
-        <g:form controller="User" action="changePassword">
+        <g:form controller="Profile" action="changePassword">
             <input type="password" class="form-control login-password" placeholder="Nueva contraseña" name="password" autocomplete="off">
             <input type="password" class="form-control login-password" placeholder="Repite la contraseña" name="repeatPassword" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Cambiar contraseña</button>
@@ -186,24 +186,24 @@
         </g:form>
     </div>
 </g:elseif>
-<g:elseif test="${groovytest.UserController.editProfile == 4}">
-    <g:form controller="User" action="editProfile">
+<g:elseif test="${ProfileController.editProfile == 4}">
+    <g:form controller="Profile" action="editProfile">
         <div class="container editprofile-form">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.username}"
+            <input type="text" class="form-control login-username" value="${user.username}"
                    placeholder="Nombre de Usuario" name="username" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.name}"
+            <input type="text" class="form-control login-username" value="${user.name}"
                    placeholder="Nombre" name="name" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.lastName}"
+            <input type="text" class="form-control login-username" value="${user.lastName}"
                    placeholder="Apellidos" name="lastName" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.phoneNumber}"
+            <input type="text" class="form-control login-username" value="${user.phoneNumber}"
                    placeholder="Teléfono" name="phoneNumber" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.address}"
+            <input type="text" class="form-control login-username" value="${user.address}"
                    placeholder="Dirección" name="address" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Guardar</button>
         </div>
     </g:form>
     <div class="container changepassword-form">
-        <g:form controller="User" action="changePassword">
+        <g:form controller="Profile" action="changePassword">
             <input type="password" class="form-control login-password" placeholder="Nueva contraseña" name="password" autocomplete="off">
             <input type="password" class="form-control login-password" placeholder="Repite la contraseña" name="repeatPassword" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Cambiar contraseña</button>
@@ -211,25 +211,25 @@
         </g:form>
     </div>
 </g:elseif>
-<g:elseif test="${groovytest.UserController.editProfile == 5}">
-    <g:form controller="User" action="editProfile">
+<g:elseif test="${ProfileController.editProfile == 5}">
+    <g:form controller="Profile" action="editProfile">
         <div class="container editprofile-form">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.username}"
+            <input type="text" class="form-control login-username" value="${user.username}"
                    placeholder="Nombre de Usuario" name="username" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.name}"
+            <input type="text" class="form-control login-username" value="${user.name}"
                    placeholder="Nombre" name="name" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.lastName}"
+            <input type="text" class="form-control login-username" value="${user.lastName}"
                    placeholder="Apellidos" name="lastName" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.phoneNumber}"
+            <input type="text" class="form-control login-username" value="${user.phoneNumber}"
                    placeholder="Teléfono" name="phoneNumber" autocomplete="off">
-            <input type="text" class="form-control login-username" value="${HomeScreenController.user.address}"
+            <input type="text" class="form-control login-username" value="${user.address}"
                    placeholder="Dirección" name="address" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Guardar</button>
             <p class="fail-label-succes">Tus datos se han actualizado.</p>
         </div>
     </g:form>
     <div class="container changepassword-form">
-        <g:form controller="User" action="changePassword">
+        <g:form controller="Profile" action="changePassword">
             <input type="password" class="form-control login-password" placeholder="Nueva contraseña" name="password" autocomplete="off">
             <input type="password" class="form-control login-password" placeholder="Repite la contraseña" name="repeatPassword" autocomplete="off">
             <button type="submit" class="btn btn-primary btn-large login-button">Cambiar contraseña</button>

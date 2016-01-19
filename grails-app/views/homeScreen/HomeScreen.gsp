@@ -53,7 +53,7 @@
                 <button type="submit" class="btn btn-default">Buscar</button>
             </g:form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/groovyTest/profile">Mi perfil</a></li>
+                <li><a href="/groovyTest/Profile/index">Mi perfil</a></li>
                 <li><a href="/groovyTest/User/logout">Cerrar sesión</a> </li>
             </ul>
         </div><!-- /.navbar-collapse -->

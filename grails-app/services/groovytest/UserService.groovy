@@ -24,13 +24,39 @@ class UserService {
 
     }
 
-    void logIn(User user, String username, String password) {
+    User logIn(String username, String password) {
 
-        user = User.findByUsernameAndPass(username, password)
+        def user = User.findByUsernameAndPass(username, password)
+
         if (user) {
-            UserController.currentUser = user
-            println "Logged in as @${user.username}. ${user.name}"
+            return user
+
+        } else {
+            println "Log in failed"
+
         }
 
     }
+
+    User searchUser(String search) {
+
+        def currentUser = User.find(UserController.currentUser)
+
+        def u = User.findByUsername(search)
+
+        if (u && u.username == currentUser.username) {
+            println "Yourself"
+
+        } else if (!u) {
+            println "User not found :("
+
+        } else if (u) {
+
+            println "User founded, name: ${u.name}"
+            return u
+
+        }
+
+    }
+
 }
