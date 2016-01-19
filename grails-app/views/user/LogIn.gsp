@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Social</title>
+    <g:javascript library="jquery" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
@@ -95,7 +96,7 @@
         <br>
             <input type="text" class="form-control login-username" placeholder="Nombre de Usuario" name="username">
             <input type="password" class="form-control login-password" placeholder="Contraseña" name="password" autocomplete="off">
-            <button type="submit" class="btn btn-primary btn-large login-button">Iniciar sesión</button>
+            <button type="submit" id="login-button" class="btn btn-primary btn-large login-button">Iniciar sesión</button>
     </g:form>
     <g:if test="${groovytest.UserController.loginFailed == 1}">
         <p class="fail-label">Nombre de usuario o contraseña incorrectos</p>
@@ -103,6 +104,13 @@
     <div class="signup-link">
         <a class="" href="signup">¿No tienes cuenta?</a>
     </div>
+    <g:link controller="User" action="login" elementId="link">Log in</g:link>
+    <div id="contenido"></div>
+    <script>
+    $('#link').click(function() {
+        $('#contenido').load(this.href); return false;
+    });
+</script>
 </div>
 </body>
 </html>

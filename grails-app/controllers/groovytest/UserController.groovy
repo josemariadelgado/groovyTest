@@ -44,8 +44,7 @@ class UserController {
 
         if (username == "" || password == "") {
 
-            loginFailed = 1
-            render view: "/user/LogIn"
+            render "Rellena todos los campos"
 
         } else {
 
@@ -59,8 +58,8 @@ class UserController {
                 redirect(controller: 'HomeScreen', action: "index")
 
             } else {
-                loginFailed = 1
-                render view: "/user/LogIn"
+
+                render "El nombre de usuario o la contraseña son incorrectos ${params.username}"
 
             }
         }
