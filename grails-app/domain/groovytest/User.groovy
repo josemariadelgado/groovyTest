@@ -2,12 +2,16 @@ package groovytest
 
 class User {
 
-    String username;
-    String pass;
-    String name;
-    String lastName;
-    String phoneNumber;
-    String address;
+    String username
+    String pass
+    String name
+    String lastName
+    String phoneNumber
+    String address
+    int followers
+    int following
+
+    static hasMany = [message: Message]
 
     static constraints = {
 

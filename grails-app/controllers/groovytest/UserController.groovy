@@ -6,6 +6,7 @@ class UserController {
     static int loginFailed = 0
     static int userAlreadyExists = 0
     static User currentUser
+    static User userSearched
     static String logInUsername = ""
 
     def UserService
@@ -14,8 +15,9 @@ class UserController {
 
         userAlreadyExists = 0
         logInUsername = ""
+        //def usersCount = User.count
 
-        render view: '/user/LogIn'
+        render (view: '/user/LogIn')
 
     }
 
@@ -54,12 +56,12 @@ class UserController {
                 loginFailed = 0
                 currentUser = user
                 println "Logged in as @${user.username}. ${user.name}"
-                session.user = currentUser
+                session.user = user
                 redirect(controller: 'HomeScreen', action: "index")
 
             } else {
 
-                render "El nombre de usuario o la contraseña son incorrectos ${params.username}"
+                render "El nombre de usuario o la contraseña son incorrectos"
 
             }
         }
@@ -79,9 +81,13 @@ class UserController {
 
             def searchedUser = UserService.searchUser search
 
+            userSearched = searchedUser
+
             if (searchedUser) {
 
-                render (view: '/user/UserProfile', model: [searchedUser: searchedUser, user: currentUser])
+                def friendship = Followers.findByUserOneAndUserTwo(currentUser, searchedUser)
+
+                render (view: '/user/UserProfile', model: [searchedUser: searchedUser, user: currentUser, friendship: friendship])
 
             } else {
                 println "User not found"
@@ -91,6 +97,49 @@ class UserController {
             redirect(uri: "/")
 
         }
+    }
+
+    def followUser() {
+
+        def follow = new Followers(userOne: currentUser, userTwo: userSearched, createDate: new Date(),
+                lastModifiedDate: new Date())
+        follow.save()
+
+        def u = User.find(currentUser)
+        u.following += 1
+        u.save(flush: true)
+
+        def u2 = User.find(userSearched)
+        u2.followers += 1
+        u2.save(flush: true)
+
+        currentUser = u
+
+        render "Ahora sigues a @${u2.username}"
+
+        if (follow.save()) {
+
+           println "You are now following @${userSearched.username}"
+        } else {
+            println "error"
+        }
+
+    }
+
+    def showAllUsers() {
+
+        if (session.user) {
+
+            def allUsers = User.list()
+            render(view: "/user/AllUsers", model: [allUsers: allUsers])
+
+        } else {
+
+            redirect(uri: "/")
+
+        }
+
+
     }
 
 }

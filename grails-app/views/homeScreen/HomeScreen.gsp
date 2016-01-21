@@ -44,7 +44,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Inicio<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Amigos</a></li>
+                <li><a href="/groovyTest/allusers">Usuarios</a></li>
             </ul>
             <g:form controller="User" action="searchUser" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -60,10 +60,18 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
+    <div class="user-info">
     <h2> @${user.username}</h2>
+    <p>Seguidores: ${user.followers}</p>
+    <p>Siguiendo: ${user.following}</p>
     <p>${user.name} ${user.lastName}</p>
     <p>${user.phoneNumber}</p>
     <p>${user.address}</p>
+    </div>
+</div><br>
+<div class="container">
+    <label>Mensaje:</label>
+    <textarea class="form-control" rows="5"></textarea>
 </div>
 </body>
 </html>

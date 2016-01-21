@@ -44,7 +44,6 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/groovyTest/HomeScreen/index">Inicio<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Amigos</a></li>
             </ul>
             <g:form controller="User" action="searchUser" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
@@ -64,9 +63,13 @@
     <p>${searchedUser.name} ${searchedUser.lastName}</p>
     <p>${searchedUser.phoneNumber}</p>
     <p>${searchedUser.address}</p>
-    <g:form controller="User" action="addAsFriend">
-    <button type="submit" class="btn btn-primary btn-large login-button">Añadir como amigo</button>
-    </g:form>
+    <g:if test="${friendship}" >
+        <button type="submit" class="btn btn-default btn-large login-button">Siguiendo</button>
+    </g:if>
+    <g:else>
+        <g:link controller="User" action="followUser" type="submit" class="btn btn-primary btn-large login-button"
+                elementId="followbutton">Seguir</g:link>
+    </g:else>
 </div>
 </body>
 </html>

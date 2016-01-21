@@ -11,6 +11,7 @@ class UrlMappings {
         "/login"(view:"/user/LogIn")
         "/signup"(view: "user/SignUp")
         "/profile"(view: "user/Profile")
+        "/allusers"(controller: "User", action: "showAllUsers")
         "500"(view:'/error')
 	}
 }

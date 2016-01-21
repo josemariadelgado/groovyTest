@@ -86,7 +86,6 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/groovyTest/homeScreen/index">Inicio<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Amigos</a></li>
             </ul>
         <g:form controller="User" action="searchUser" class="navbar-form navbar-left" role="search">
             <div class="form-group">

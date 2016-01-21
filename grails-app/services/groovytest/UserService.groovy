@@ -12,7 +12,7 @@ class UserService {
     void signUp(String username, String pass, String name, String lastName, String phoneNumber, String address) {
 
         def newUser = new User(name: name, username: username, pass: pass, lastName: lastName, phoneNumber: phoneNumber,
-                address: address)
+                address: address, followers: 0, following: 0)
 
         newUser.save()
 
@@ -55,6 +55,23 @@ class UserService {
             println "User founded, name: ${u.name}"
             return u
 
+        }
+
+    }
+
+    void addAsFriend(User userTwo) {
+
+        def currentUser = User.find(UserController.currentUser)
+
+        def u = User.findByUsername(userTwo)
+
+        def friendship = new Followers(userOne: currentUser, userTwo: u, confirmed: true, createDate: new Date(),
+        lastModifiedDate: new Date())
+        friendship.save()
+
+        if (friendship.save()) {
+
+            "New friends"
         }
 
     }

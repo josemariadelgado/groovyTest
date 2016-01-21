@@ -87,6 +87,12 @@
             margin-bottom: -20px;
         }
 
+        .user-count {
+
+            margin-left: ;
+            margin-top: 200px;
+        }
+
     </style>
 </head>
 <body class="body">
@@ -96,7 +102,7 @@
         <br>
             <input type="text" class="form-control login-username" placeholder="Nombre de Usuario" name="username">
             <input type="password" class="form-control login-password" placeholder="Contraseña" name="password" autocomplete="off">
-            <button type="submit" id="login-button" class="btn btn-primary btn-large login-button">Iniciar sesión</button>
+            <button type="submit" class="btn btn-primary btn-large login-button">Iniciar sesión</button>
     </g:form>
     <g:if test="${groovytest.UserController.loginFailed == 1}">
         <p class="fail-label">Nombre de usuario o contraseña incorrectos</p>
@@ -105,12 +111,18 @@
         <a class="" href="signup">¿No tienes cuenta?</a>
     </div>
     <g:link controller="User" action="login" elementId="link">Log in</g:link>
-    <div id="contenido"></div>
-    <script>
+    <div id="contenido">
+</div>
+</div>
+%{--<p class="user-count">Usuarios registrados: ${usersCount}</p>--}%
+<script>
+$(document).ready(function() {
+
     $('#link').click(function() {
         $('#contenido').load(this.href); return false;
     });
+
+});
 </script>
-</div>
 </body>
 </html>
