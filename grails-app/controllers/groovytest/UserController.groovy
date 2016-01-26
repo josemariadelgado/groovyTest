@@ -15,7 +15,6 @@ class UserController {
 
         userAlreadyExists = 0
         logInUsername = ""
-        //def usersCount = User.count
 
         render (view: '/user/LogIn')
 
