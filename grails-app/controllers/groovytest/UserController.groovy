@@ -1,6 +1,10 @@
 
 package groovytest
 
+import grails.plugin.springsecurity.annotation.Secured
+import groovyTest.User
+
+
 class UserController {
     def scaffold = User
     static int loginFailed = 0
@@ -11,6 +15,7 @@ class UserController {
 
     def UserService
 
+    @Secured(['ROLE_USER'])
     def index() {
 
         userAlreadyExists = 0
@@ -56,7 +61,7 @@ class UserController {
                 currentUser = user
                 println "Logged in as @${user.username}. ${user.name}"
                 session.user = user
-                redirect(controller: 'HomeScreen', action: "index")
+                render "success"
 
             } else {
 

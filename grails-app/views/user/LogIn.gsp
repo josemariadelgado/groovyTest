@@ -91,13 +91,13 @@
 </head>
 <body class="body">
 <div class="container login-form">
-    <g:form controller="User" action="login">
+    <form  method="POST" id="ajaxLoginForm" name="ajaxLoginForm">
         <h1 class="login-label"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Log In</h1>
         <br>
             <input type="text" class="form-control login-username" placeholder="Nombre de Usuario" name="username">
             <input type="password" class="form-control login-password" placeholder="Contraseña" name="password" autocomplete="off">
-            <button type="submit" id="enviar" class="btn btn-primary btn-large login-button">Iniciar sesión</button>
-    </g:form>
+            <input type="button" onclick="authAjax(); return false;" value="Iniciar sesión" id="enviar" class="btn btn-primary btn-large login-button"></input>
+    </form>
     <g:if test="${groovytest.UserController.loginFailed == 1}">
         <p class="fail-label">Nombre de usuario o contraseña incorrectos</p>
     </g:if>
@@ -108,7 +108,33 @@
 </div>
 </div>
 <script>
-
+    function authAjax()
+    {
+        var formdata = $('#ajaxLoginForm').serialize();
+        var dataUrl = "/groovyTest/User/login"
+        jQuery.ajax({
+            type : 'POST',
+            url :  dataUrl ,
+            data : formdata,
+            success : function(response,textStatus)
+            {
+                if(response == "success")
+                {
+                    var redirectUrl="${ createLink(action:'index' ,controller:'HomeScreen') }";
+                    window.location.assign(redirectUrl);
+                }
+                else
+                {
+                    $('#contenido').html("error");
+                }
+            },
+            error : function(
+                    XMLHttpRequest,
+                    textStatus,
+                    errorThrown) {
+            }
+        });
+    }
 
 </script>
 </body>

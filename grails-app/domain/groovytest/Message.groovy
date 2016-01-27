@@ -1,5 +1,8 @@
 package groovytest
 
+import groovyTest.User
+
+
 class Message {
     String text
 

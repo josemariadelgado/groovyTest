@@ -1,6 +1,7 @@
 package groovytest
 
 import grails.transaction.Transactional
+import groovyTest.User
 
 @Transactional
 class UserService {
@@ -9,10 +10,10 @@ class UserService {
 
     }
 
-    void signUp(String username, String pass, String name, String lastName, String phoneNumber, String address) {
+    void signUp(String username, String password, String name, String lastName, String phoneNumber, String address) {
 
-        def newUser = new User(name: name, username: username, pass: pass, lastName: lastName, phoneNumber: phoneNumber,
-                address: address, followers: 0, following: 0)
+        def newUser = new User(name: name, username: username, password: password, enabled: true, accountExpired: false,
+                accountLocked: false, passwordExpired: false, lastName: lastName, phoneNumber: phoneNumber, address: address)
 
         newUser.save()
 
@@ -26,7 +27,7 @@ class UserService {
 
     User logIn(String username, String password) {
 
-        def user = User.findByUsernameAndPass(username, password)
+        def user = User.findByUsernameAndPassword(username, password)
 
         if (user) {
             return user
