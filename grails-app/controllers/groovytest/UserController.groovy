@@ -4,7 +4,7 @@ package groovytest
 import grails.plugin.springsecurity.annotation.Secured
 import groovyTest.User
 
-
+@Secured(['permitAll'])
 class UserController {
     def scaffold = User
     static int loginFailed = 0
@@ -15,7 +15,6 @@ class UserController {
 
     def UserService
 
-    @Secured(['ROLE_USER'])
     def index() {
 
         userAlreadyExists = 0

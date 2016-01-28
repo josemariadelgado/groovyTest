@@ -5,18 +5,15 @@ import groovyTest.UserRole
 class BootStrap {
 
     def init = { servletContext ->
-        def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
 
-        def testUser = new User(name: "chema", username: "chema", password: "123", enabled: true, accountExpired: false,
-                accountLocked: false, passwordExpired: false, lastName: "delgado", phoneNumber: "666", address: "address")
-        testUser.save(flush: true)
+        def adminRole = Role.findOrSaveWhere(authority: 'ROLE_ADMIN')
+        def user = User.findOrSaveWhere(username: 'admin', password: 'password', name: 'admin')
 
-        UserRole.create testUser, userRole, true
-
-        assert User.count() == 1
-        assert Role.count() == 1
-        assert UserRole.count() == 1
+        if (!user.authorities.contains(adminRole)) {
+            UserRole.create(user, adminRole, true)
+        }
     }
+
     def destroy = {
     }
 }

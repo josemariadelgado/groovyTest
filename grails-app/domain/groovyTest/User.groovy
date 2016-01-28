@@ -18,9 +18,8 @@ class User implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 	String name
-	String lastName
-	String phoneNumber
-	String address
+
+	static transients = ['springSecurityService']
 
 //	User(String username, String password) {
 //		this()
@@ -46,11 +45,10 @@ class User implements Serializable {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 
-	static transients = ['springSecurityService']
-
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+		name nullable: false
 	}
 
 	static mapping = {

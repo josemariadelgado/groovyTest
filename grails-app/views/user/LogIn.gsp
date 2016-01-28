@@ -73,12 +73,6 @@
             color: #424242;
         }
 
-        .fail-label {
-            color: red;
-            margin-left: 18px;
-            margin-top: 20px;
-            margin-bottom: -10px;
-        }
 
         .signup-link {
             width: 200px;
@@ -94,13 +88,10 @@
     <form  method="POST" id="ajaxLoginForm" name="ajaxLoginForm">
         <h1 class="login-label"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Log In</h1>
         <br>
-            <input type="text" class="form-control login-username" placeholder="Nombre de Usuario" name="username">
-            <input type="password" class="form-control login-password" placeholder="Contraseña" name="password" autocomplete="off">
-            <input type="button" onclick="authAjax(); return false;" value="Iniciar sesión" id="enviar" class="btn btn-primary btn-large login-button"></input>
+            <input type="text" class="form-control login-username" placeholder="Nombre de Usuario" name="j_username">
+            <input type="password" class="form-control login-password" placeholder="Contraseña" name="j_password" autocomplete="off">
+            <input type="button" onclick="authAjax(); return false;" value="Iniciar sesión" id="enviar" class="btn btn-primary btn-large login-button">
     </form>
-    <g:if test="${groovytest.UserController.loginFailed == 1}">
-        <p class="fail-label">Nombre de usuario o contraseña incorrectos</p>
-    </g:if>
     <div class="signup-link">
         <a class="" href="signup">¿No tienes cuenta?</a>
     </div>
@@ -111,20 +102,17 @@
     function authAjax()
     {
         var formdata = $('#ajaxLoginForm').serialize();
-        var dataUrl = "/groovyTest/User/login"
+        var dataUrl = "/groovyTest/j_spring_security_check";
         jQuery.ajax({
             type : 'POST',
             url :  dataUrl ,
             data : formdata,
-            success : function(response,textStatus)
-            {
-                if(response == "success")
-                {
-                    var redirectUrl="${ createLink(action:'index' ,controller:'HomeScreen') }";
+            success : function(response,textStatus) {
+                if(response.success) {
+                    var redirectUrl="${createLink(controller:'Home', action: "index") }";
                     window.location.assign(redirectUrl);
                 }
-                else
-                {
+                else {
                     $('#contenido').html("error");
                 }
             },

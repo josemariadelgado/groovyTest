@@ -7,9 +7,9 @@ class UrlMappings {
             }
         }
 
-        "/"(controller: 'User')
-        "/login"(view:"/user/LogIn")
-        "/signup"(view: "user/SignUp")
+        "/"(controller: "Home", action: "index")
+        "/login"(controller: "Login", action: "index")
+        "/signup"(controller: "SignUp", action: "index")
         "/profile"(view: "user/Profile")
         "/allusers"(controller: "User", action: "showAllUsers")
         "500"(view:'/error')

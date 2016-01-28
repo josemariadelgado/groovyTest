@@ -14,6 +14,9 @@
  */
 package grails.plugin.springsecurity
 
+import grails.plugin.springsecurity.annotation.Secured
+import org.apache.http.client.RedirectStrategy
+
 import javax.servlet.http.HttpServletResponse
 
 import org.springframework.security.access.annotation.Secured

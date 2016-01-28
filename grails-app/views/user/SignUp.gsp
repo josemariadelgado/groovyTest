@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-
-
+    <g:javascript library="jquery" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <style type="text/css">
-    .body {
-        background: white;
-    }
 
     .signup-form {
         margin-top: 250px;
@@ -43,8 +37,6 @@
         margin-left: 10px;
     }
 
-
-
     .signup-form .form-control {
         margin-top: 7px;
     }
@@ -61,61 +53,57 @@
         margin-left: 10px;
     }
 
-    .login-password {
-        border-width: 1px;
-        border-color: #eeeeee;
-        border-radius: 2px;
-        width: 300px;
-        margin-left: 10px;
-    }
-
-    .login-label{
-        margin-top: 0px;
-        margin-left: 28%;
-        color: #424242;
-    }
-
-    .fail-label {
-        color: red;
-        margin-left: 18px;
+    .failedLabel {
         margin-top: 20px;
-        margin-bottom: -10px;
+        margin-left: 11px;
+        margin-bottom: -5px;
     }
 
-    .signup-link {
-        width: 200px;
-        margin-left: 100px;
-        margin-top: 30px;
-        margin-bottom: -20px;
-    }
     </style>
+    <script>
+        function signUp()
+        {
+            var formdata = $('#signUpForm').serialize();
+            var dataUrl = "${createLink(controller: "SignUp", action: "signUp") }";
+            jQuery.ajax({
+                type : 'POST',
+                url :  dataUrl ,
+                data : formdata,
+                success : function(response,textStatus) {
 
+                    if(response == "User saved") {
+                        var redirectUrl="${createLink(controller: "LogIn", action: "index") }";
+                        window.location.assign(redirectUrl);
 
+                    } else if(response == "Empty fields") {
+                        $('#failedLabel').html("Debes rellenar todos los campos");
+                        document.getElementById("failedLabel").style.color = "red";
+
+                    } else if(response == "User already exists") {
+                        $('#failedLabel').html("El nombre de usuario no está disponible");
+                        document.getElementById("failedLabel").style.color = "red";
+                    }
+                },
+
+                error : function(
+                        XMLHttpRequest,
+                        textStatus,
+                        errorThrown) {
+                }
+            });
+        }
+
+    </script>
 </head>
-
 <body>
-<div class="login">
-    <div class="login-screen">
-        <div class="app-title">
-            <div class="container signup-form">
-                <g:form controller="User" action="signUp">
-                    <input type="text" class="form-control username-field" name="username" placeholder="Nombre de Usuario *" autocomplete="off">
-                    <input type="password" class="form-control password-field" name="password" placeholder="Contraseña *" autocomplete="off">
-                    <input type="text" class="form-control name-field" name="name" placeholder="Nombre *" autocomplete="off">
-                    <input type="text" class="form-control lastname-field" name="lastName" placeholder="Apellidos *" autocomplete="off">
-                    <input type="text" class="form-control phoneNumber-field" name="phoneNumber" placeholder="Teléfono" autocomplete="off">
-                    <input type="text" class="form-control address-field" name="address" placeholder="Dirección" autocomplete="off">
-                    <button type="submit" class="btn btn-primary signup-button">Sign Up!</button>
-                </g:form>
-                <g:if test="${groovytest.UserController.userAlreadyExists == 1}">
-                <p class="fail-label">El nombre de usuario ya está siendo usado por otra persona.</p>
-                </g:if>
-                <g:if test="${groovytest.UserController.userAlreadyExists == 2}">
-                    <p class="fail-label">El nombre de usuario, la contraseña, el nombre y los apellidos son campos obligatorios.</p>
-                </g:if>
-            </div>
-    </div>
-</div>
+<div class="container signup-form">
+    <form method="POST" id="signUpForm" name="signUpForm">
+        <input type="text" class="form-control username-field" name="username" placeholder="Nombre de Usuario *" autocomplete="off">
+        <input type="text" class="form-control name-field" name="name" placeholder="Nombre *" autocomplete="off">
+        <input type="password" class="form-control password-field" name="password" placeholder="Contraseña *" autocomplete="off">
+        <input type="button" class="btn btn-primary signup-button" value="Regístrate" onclick="signUp(); return false;">
+    </form>
+    <p class="failedLabel" id="failedLabel"></p>
 </div>
 </body>
 </html>

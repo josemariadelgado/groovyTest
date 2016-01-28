@@ -5,7 +5,7 @@
   Time: 13:51
 --%>
 
-<%@ page import="groovytest.ProfileController; groovytest.HomeScreenController" contentType="text/html;charset=UTF-8" %>
+<%@ page import="groovytest.ProfileController; groovytest.HomeController" contentType="text/html;charset=UTF-8" %>
 <%@ page import="groovytest.UserController" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>

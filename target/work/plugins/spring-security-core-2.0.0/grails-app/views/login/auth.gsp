@@ -2,6 +2,12 @@
 <head>
 	<meta name='layout' content='main'/>
 	<title><g:message code="springSecurity.login.title"/></title>
+	<g:javascript library="jquery" />
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<style type='text/css' media='screen'>
 	#login {
 		margin: 15px 0px;
@@ -89,11 +95,9 @@
 	<div class='inner'>
 		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
 
-		<g:if test='${flash.message}'>
-			<div class='login_message'>${flash.message}</div>
-		</g:if>
+			<div class='login_message'><p id="login_message"></p></div>
 
-		<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
+		<form method='POST' id='loginForm' class='cssform' autocomplete='off'>
 			<p>
 				<label for='username'><g:message code="springSecurity.login.username.label"/>:</label>
 				<input type='text' class='text_' name='j_username' id='username'/>
@@ -104,17 +108,9 @@
 				<input type='password' class='text_' name='j_password' id='password'/>
 			</p>
 
-			<p id="remember_me_holder">
-				<input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
-				<label for='remember_me'><g:message code="springSecurity.login.remember.me.label"/></label>
-			</p>
-
 			<p>
-				<input type='submit' id="submit" value='${message(code: "springSecurity.login.button")}'/>
+				<input type='submit' id="submit" onclick="login(); return false;" value='Iniciar sesión'/>
 			</p>
-			<div class="signup-link">
-				<a class="" href="/groovyTest/signup">¿No tienes cuenta?</a>
-			</div>
 		</form>
 	</div>
 </div>
@@ -122,6 +118,31 @@
 (function() {
 	document.forms['loginForm'].elements['j_username'].focus();
 })();
+
+function login()
+{
+	var formdata = $('#loginForm').serialize();
+	var dataUrl = "${postUrl}";
+	jQuery.ajax({
+		type : 'POST',
+		url :  dataUrl ,
+		data : formdata,
+		success : function(response,textStatus) {
+			if(response.success) {
+				var redirectUrl="${createLink(controller:'Home', action: "index") }";
+				window.location.assign(redirectUrl);
+			}
+			else {
+				$('#login_message').html("error");
+			}
+		},
+		error : function(
+				XMLHttpRequest,
+				textStatus,
+				errorThrown) {
+		}
+	});
+}
 </script>
 </body>
 </html>

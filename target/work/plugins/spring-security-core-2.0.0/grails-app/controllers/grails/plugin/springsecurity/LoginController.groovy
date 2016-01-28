@@ -15,6 +15,7 @@
 package grails.plugin.springsecurity
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 
 import javax.servlet.http.HttpServletResponse
 
@@ -59,7 +60,7 @@ class LoginController {
 		def config = SpringSecurityUtils.securityConfig
 
 		if (springSecurityService.isLoggedIn()) {
-			redirect uri: config.successHandler.defaultTargetUrl
+			redirect uri: "/"
 			return
 		}
 
