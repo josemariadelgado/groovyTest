@@ -18,6 +18,8 @@ class User implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 	String name
+	int following = 0
+	int followers = 0
 
 	static transients = ['springSecurityService']
 

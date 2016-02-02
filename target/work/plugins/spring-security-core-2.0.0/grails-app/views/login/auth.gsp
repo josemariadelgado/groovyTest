@@ -9,115 +9,91 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<style type='text/css' media='screen'>
-	#login {
-		margin: 15px 0px;
-		padding: 0px;
-		text-align: center;
+
+	.login-form {
+		margin-top: 250px;
+		margin-left: auto;
+		width: 350px;
+		border-spacing: 20px;
+		border-radius: 5px;
+		background: white;
+		border: solid;
+		border-width: 1px;
+		border-color:#F0F0F0;
+		font-family: "Ubuntu";
 	}
 
-	#login .inner {
-		width: 340px;
-		padding-bottom: 6px;
-		margin: 60px auto;
-		text-align: left;
-		border: 1px solid #aab;
-		background-color: #f0f0fa;
-		-moz-box-shadow: 2px 2px 2px #eee;
-		-webkit-box-shadow: 2px 2px 2px #eee;
-		-khtml-box-shadow: 2px 2px 2px #eee;
-		box-shadow: 2px 2px 2px #eee;
+	.login-form .form-control {
+		margin-top: 7px;;
 	}
 
-	#login .inner .fheader {
-		padding: 18px 26px 14px 26px;
-		background-color: #f7f7ff;
-		margin: 0px 0 14px 0;
-		color: #2e3741;
-		font-size: 18px;
-		font-weight: bold;
+	.login-button {
+		margin-top: 10px;
+		width: 100%;
+		background: #5882FA;
+		border-width: 0px;
+		width: 300px;
+		margin-left: 10px;
 	}
 
-	#login .inner .cssform p {
-		clear: left;
-		margin: 0;
-		padding: 4px 0 3px 0;
-		padding-left: 105px;
-		margin-bottom: 20px;
-		height: 1%;
+	.signup-form .form-control {
+		margin-top: 7px;
 	}
 
-	#login .inner .cssform input[type='text'] {
-		width: 120px;
+	.signup-form .signup-button {
+		margin-top: 15px;
 	}
 
-	#login .inner .cssform label {
-		font-weight: bold;
-		float: left;
-		text-align: right;
-		margin-left: -105px;
-		width: 110px;
-		padding-top: 3px;
-		padding-right: 10px;
+	.login-username {
+		border-width: 1px;
+		border-color: #eeeeee;
+		border-radius: 2px;
+		width: 300px;
+		margin-left: 10px;
 	}
 
-	#login #remember_me_holder {
-		padding-left: 120px;
+	.login-password {
+		border-width: 1px;
+		border-color: #eeeeee;
+		border-radius: 2px;
+		width: 300px;
+		margin-left: 10px;
 	}
 
-	#login #submit {
-		margin-left: 15px;
+	.login-label{
+		margin-top: 0px;
+		margin-left: 28%;
+		color: #424242;
 	}
 
-	#login #remember_me_holder label {
-		float: none;
-		margin-left: 0;
-		text-align: left;
-		width: 200px
+	.signup-link {
+		width: 200px;
+		margin-left: 100px;
+		margin-top: 30px;
+		margin-bottom: -20px;
 	}
 
-	#login .inner .login_message {
-		padding: 6px 25px 20px 25px;
-		color: #c33;
-	}
-
-	#login .inner .text_ {
-		width: 120px;
-	}
-
-	#login .inner .chk {
-		height: 12px;
+	.failedLabel {
+		margin-top: 30px;
+		margin-left: 11px;
+		margin-bottom: -30px;
 	}
 	</style>
 </head>
 
 <body>
-<div id='login'>
-	<div class='inner'>
-		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
-
-			<div class='login_message'><p id="login_message"></p></div>
-
-		<form method='POST' id='loginForm' class='cssform' autocomplete='off'>
-			<p>
-				<label for='username'><g:message code="springSecurity.login.username.label"/>:</label>
-				<input type='text' class='text_' name='j_username' id='username'/>
-			</p>
-
-			<p>
-				<label for='password'><g:message code="springSecurity.login.password.label"/>:</label>
-				<input type='password' class='text_' name='j_password' id='password'/>
-			</p>
-
-			<p>
-				<input type='submit' id="submit" onclick="login(); return false;" value='Iniciar sesión'/>
-			</p>
-		</form>
+<div class="container login-form">
+	<form  method="POST" id="loginForm" name="ajaxLoginForm">
+		<input type="text" class="form-control login-username" placeholder="Nombre de Usuario" name="j_username">
+		<input type="password" class="form-control login-password" placeholder="Contraseña" name="j_password" autocomplete="off">
+		<button type="submit" onclick="login(); return false;" id="enviar" class="btn btn-primary btn-large login-button">Iniciar sesión</button>
+	</form>
+	<div class="signup-link">
+		<g:link controller="SignUp" action="index">¿No tienes cuenta?</g:link>
 	</div>
+		<p class="failedLabel" id="login_message"></p>
 </div>
 <script type='text/javascript'>
-(function() {
-	document.forms['loginForm'].elements['j_username'].focus();
-})();
 
 function login()
 {
@@ -125,7 +101,7 @@ function login()
 	var dataUrl = "${postUrl}";
 	jQuery.ajax({
 		type : 'POST',
-		url :  dataUrl ,
+		url :  dataUrl,
 		data : formdata,
 		success : function(response,textStatus) {
 			if(response.success) {
@@ -133,7 +109,9 @@ function login()
 				window.location.assign(redirectUrl);
 			}
 			else {
-				$('#login_message').html("error");
+				$('#login_message').html("Nombre de usuario y contraseña incorrectos");
+				document.getElementById("login_message").style.color = "red";
+				shakeForm();
 			}
 		},
 		error : function(
@@ -142,6 +120,14 @@ function login()
 				errorThrown) {
 		}
 	});
+}
+function shakeForm() {
+	var l = 10;
+	for( var i = 0; i < 10; i++ )
+		$( "#login_message" ).animate( {
+			'margin-left': "+=" + ( l = -l ) + 'px',
+			'margin-right': "-=" + l + 'px'
+		}, 50);
 }
 </script>
 </body>

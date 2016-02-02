@@ -11,7 +11,7 @@ class HomeController {
 
         if (SpringSecurityService.isLoggedIn()) {
             def user = SpringSecurityService.getCurrentUser()
-            render(view: "/home/Home", model: [user: user])
+            render(view: "/Home", model: [user: user])
         } else {
             redirect(uri: "/login")
         }

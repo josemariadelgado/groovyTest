@@ -9,7 +9,7 @@ class SignUpController {
     def SignUpService
 
     def index() {
-        render(view: "/user/SignUp")
+        render(view: "/SignUp")
     }
 
     def signUp(String username, String password, String name) {

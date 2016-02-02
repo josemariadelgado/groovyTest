@@ -1,5 +1,6 @@
 package groovytest
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.transaction.Transactional
 import groovyTest.User
 
@@ -41,23 +42,13 @@ class UserService {
 
     User searchUser(String search) {
 
-        def currentUser = User.find(UserController.currentUser)
+        def user = User.findByUsername(search)
 
-        def u = User.findByUsername(search)
+        if (user) {
 
-        if (u && u.username == currentUser.username) {
-            println "Yourself"
-
-        } else if (!u) {
-            println "User not found :("
-
-        } else if (u) {
-
-            println "User founded, name: ${u.name}"
-            return u
-
+            println "User founded, name: ${user.name}"
+            return user
         }
-
     }
 
     void addAsFriend(User userTwo) {

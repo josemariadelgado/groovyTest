@@ -12,7 +12,7 @@ class ProfileController {
 
             editProfile = 0
             def user = UserController.currentUser
-            render (view: '/user/Profile', model: [user: user])
+            render (view: '/Profile', model: [user: user])
 
         } else {
             redirect(uri: '/')
@@ -24,7 +24,7 @@ class ProfileController {
 
         editProfile = 1
         def user = UserController.currentUser
-        render (view: '/user/Profile', model: [user: user])
+        render (view: '/Profile', model: [user: user])
     }
 
     def editProfile(String username, String name, String lastName, String phoneNumber, String address) {
@@ -33,14 +33,14 @@ class ProfileController {
 
             editProfile = 2
             def user = UserController.currentUser
-            render (view: '/user/Profile', model: [user: user])
+            render (view: '/Profile', model: [user: user])
 
         } else {
 
             ProfileService.editProfile username, name, lastName, phoneNumber, address
             editProfile = 5
             def user = UserController.currentUser
-            render (view: '/user/Profile', model: [user: user])
+            render (view: '/Profile', model: [user: user])
 
         }
 
@@ -54,12 +54,12 @@ class ProfileController {
 
             editProfile = 4
             def user = UserController.currentUser
-            render (view: '/user/Profile', model: [user: user])
+            render (view: '/Profile', model: [user: user])
 
         } else {
             editProfile = 3
             def user = UserController.currentUser
-            render (view: '/user/Profile', model: [user: user])
+            render (view: '/Profile', model: [user: user])
         }
 
     }
